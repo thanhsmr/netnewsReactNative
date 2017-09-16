@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 
 import NewsHome from './screens/NewsHome';
+import NewsDetail from './screens/NewsDetail';
+
 import TVHome from './screens/TVHome';
 import RadioHome from './screens/RadioHome';
 import TopNowHome from './screens/TopNowHome';
@@ -17,7 +19,16 @@ import MoreHome from './screens/MoreHome';
 
 export const NewsStack = StackNavigator ({
   newsHomeScreen: {
-    screen: NewsHome
+    screen: NewsHome,
+    navigationOptions: {
+      header: null
+    }
+  },
+  newsDetailScreen: {
+    screen: NewsDetail,
+    navigationOptions: {
+      title: 'News Detail'
+    }
   }
 })
 
@@ -58,6 +69,7 @@ export const Tabbar = TabNavigator ({
     screen: NewsStack,
     navigationOptions: {
       tabBarLabel: 'News',
+      headerMode: 'screen',
       tabBarIcon: ({tintColor}) => (
         <Image
           source={require('../images/newsOn.png')}
@@ -119,7 +131,7 @@ export const Tabbar = TabNavigator ({
   tabBarPosition: 'bottom',
   tabBarOptions: {
     activeTintColor: 'blue',
-    inactivetintColor: 'gray'
+    inactivetintColor: 'gray',
   }
 }
 )
