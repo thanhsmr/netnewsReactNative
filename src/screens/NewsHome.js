@@ -14,34 +14,27 @@ export default class NewsHome extends Component {
   constructor(props){
     super(props);
     this.state = {
-      newsArray : [],
+      newsArray : []
     };
-  }
-
-  _renderTitleIndicator() {
-
-            return <PagerTitleIndicator titles={['one', 'two', 'three']} />;
   }
 
   _onPressItem = (articleObject) => {
     this.props.navigation.navigate('newsDetailScreen', {article: articleObject})
   }
 
-  render() {
-    // var screenCategories = []
-    // for (var category in newsArray) {
-    //   if (newsArray.hasOwnProperty(category)) {
-    //     screenCategories.add
-    //   }
-    // }
+  _renderCategoryView = (v, i) => {
+    return <NewsCategory tabLabel = {v.Name} onPressItem = {this._onPressItem}/>
+  }
 
+  _renderCategories = () => {
+    let {newsArray} = this.state
+    return  <ScrollableTabView> newsArray.map(this._renderCategoryView) </ScrollableTabView>
+  }
+
+  render() {
     return(
       <View style={{flex:1}}>
-          <ScrollableTabView>
-            <NewsCategory tabLabel="React" onPressItem = {this._onPressItem}/>
-            <NewsCategory tabLabel="Flow" onPressItem = {this._onPressItem}/>
-            <NewsCategory tabLabel="Jest" onPressItem = {this._onPressItem}/>
-          </ScrollableTabView>
+            {this._renderCategories()}
       </View>
     );
   }
