@@ -34,25 +34,37 @@ export const NewsStack = StackNavigator ({
 
 export const TVStack = StackNavigator ({
   tvHomeScreen: {
-    screen: TVHome
+    screen: TVHome,
+    navigationOptions: {
+      header: null
+    }
   }
 })
 
 export const RadioStack = StackNavigator ({
   radioHomeScreen: {
-    screen: RadioHome
+    screen: RadioHome,
+    navigationOptions: {
+      header: null
+    }
   }
 })
 
 export const TopNowStack = StackNavigator ({
   topNowHomeScreen: {
-    screen: TopNowHome
+    screen: TopNowHome,
+    navigationOptions: {
+      header: null
+    }
   }
 })
 
 export const MoreStack = StackNavigator ({
   moreHomeScreen: {
-    screen: MoreHome
+    screen: MoreHome,
+    navigationOptions: {
+      header: null
+    }
   }
 })
 

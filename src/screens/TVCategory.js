@@ -3,8 +3,7 @@ import {
   View, Text, FlatList, ActivityIndicator,Platform
 } from 'react-native';
 
-import NewsRow from '../rows/NewsRow';
-import TopNewsRow from '../rows/TopNewsRow';
+import RadioRow from '../rows/RadioRow';
 import Article from '../model/Article';
 import FooterLoading from '../component/FooterLoading';
 
@@ -17,7 +16,6 @@ export default class NewsCategory extends Component {
       newsArray : [],
       isLoadingMore: false,
       isReloading: false,
-      selected: (new Map(): Map<string, boolean>)
     };
   }
 
@@ -29,7 +27,7 @@ export default class NewsCategory extends Component {
         isLoadingMore: true
       }, () => {
         fetch(
-          'http://125.235.16.131/Tinngan.svc/getListCate/' + this.props.category.ID + '/' + this.state.page + 1 + '/20',{
+          'http://125.235.16.131/Tinngan.svc/getRadioNew/' + this.props.category.ID + '/' + this.state.page + 1 + '/20',{
             headers: {
               'user':'tinngan',
               'password':'191f1f632d69180e6228d26849d34d081a3b8d8aa9197eba0f70530ffe698ba80108bfb075c43e82081e245ccb63f6a39107327b2c1d053469bdf4f09bc1e820'
@@ -66,7 +64,7 @@ export default class NewsCategory extends Component {
       page: 1
     },()=>{
       fetch(
-        'http://125.235.16.131/Tinngan.svc/getListCate/' + this.props.category.ID + '/1/20',{
+        'http://125.235.16.131/Tinngan.svc/getRadioNew/' + this.props.category.ID + '/1/20',{
           headers: {
             'user':'tinngan',
             'password':'191f1f632d69180e6228d26849d34d081a3b8d8aa9197eba0f70530ffe698ba80108bfb075c43e82081e245ccb63f6a39107327b2c1d053469bdf4f09bc1e820'
@@ -111,11 +109,7 @@ export default class NewsCategory extends Component {
         ListFooterComponent = {() => <FooterLoading isLoading = {this.state.isLoadingMore}/>}
         renderItem={
           ({item, index}) => {
-            if (index == 0) {
-              return <TopNewsRow {...item} indexRow = {index} onPressItem = {this._onPressItem}/>
-            } else {
-              return <NewsRow {...item} indexRow = {index} onPressItem = {this._onPressItem}/>
-            }
+              return <RadioRow {...item} indexRow = {index} onPressItem = {this._onPressItem}/>
           }
         }
         />
@@ -124,7 +118,7 @@ export default class NewsCategory extends Component {
 
   componentDidMount(){
     fetch(
-      'http://125.235.16.131/Tinngan.svc/getListCate/' + this.props.category.ID + '/1/20',{
+      'http://125.235.16.131/Tinngan.svc/getRadioNew/' + this.props.category.ID + '/1/20',{
         headers: {
           'user':'tinngan',
           'password':'191f1f632d69180e6228d26849d34d081a3b8d8aa9197eba0f70530ffe698ba80108bfb075c43e82081e245ccb63f6a39107327b2c1d053469bdf4f09bc1e820'

@@ -6,7 +6,7 @@ import {
 import NewsCategory from '../screens/NewsCategory';
 import {PagerTabIndicator, IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator} from 'rn-viewpager';
 
-var ScrollableTabView = require('react-native-scrollable-tab-view');
+import ScrollableTabView, { ScrollableTabBar, } from 'react-native-scrollable-tab-view';
 // var DefaultTabBar = require('../component/DefaultTabBar');
 
 export default class NewsHome extends Component {
@@ -23,18 +23,25 @@ export default class NewsHome extends Component {
   }
 
   _renderCategoryView = (v, i) => {
-    return <NewsCategory tabLabel = {v.Name} onPressItem = {this._onPressItem}/>
+    return <NewsCategory key = {i} tabLabel = {v.Name} category = {v} onPressItem = {this._onPressItem}/>
   }
 
   _renderCategories = () => {
     let {newsArray} = this.state
-    return  <ScrollableTabView> newsArray.map(this._renderCategoryView) </ScrollableTabView>
+    if (this.state.newsArray.length > 0) {
+        return  <ScrollableTabView renderTabBar={() => <ScrollableTabBar />}>
+                    {newsArray.map(this._renderCategoryView)}
+                </ScrollableTabView>
+    } else {
+      return null
+    }
+
   }
 
   render() {
     return(
-      <View style={{flex:1}}>
-            {this._renderCategories()}
+      <View style={{flex:1,paddingTop: Platform.OS == 'ios' ? 20 : 0}}>
+        {this._renderCategories()}
       </View>
     );
   }
